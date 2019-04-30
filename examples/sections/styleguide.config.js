@@ -1,66 +1,28 @@
-const path = require('path')
 const vueLoader = require('vue-loader')
 
 module.exports = {
-	title: 'Vue Style Guide Example',
-	pagePerSection: true,
 	sections: [
 		{
-			name: 'Documentation',
-			content: 'docs/Documentation.md',
+			name: 'Atoms',
 			sections: [
 				{
-					name: 'Files',
-					content: 'docs/Files.md',
-					sections: [
-						{
-							name: 'First File',
-							content: 'docs/One.md',
-							description: 'This is the first section description',
-							components: () => ['./src/components/Label/Label.vue']
-						},
-						{
-							name: 'Second File',
-							content: 'docs/Two.md'
-						}
-					]
+					components: './src/components/Label/Label.vue'
 				},
 				{
-					name: 'Online documentation',
-					href: 'https://github.com/vue-styleguidist/vue-styleguidist',
-					external: true
+					components: './src/components/Button/Button.vue'
 				}
-			],
-			sectionDepth: 2
+			]
+		},
+		{
+			name: 'Empty',
+			components: []
 		},
 		{
 			name: 'Components',
-			sections: [
-				{
-					name: 'Buttons',
-					components: () => ['./src/components/Button/Button.vue'],
-					exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
-					usageMode: 'hide' // 'hide' | 'collapse' | 'expand'
-				},
-				{
-					name: 'Fields',
-					components: () => ['./src/components/Placeholder/Placeholder.vue'],
-					exampleMode: 'expand', // 'hide' | 'collapse' | 'expand'
-					usageMode: 'expand' // 'hide' | 'collapse' | 'expand'
-				},
-				{
-					name: 'Others',
-					components: () => ['./src/components/RandomButton/RandomButton.vue'],
-					exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
-					usageMode: 'collapse' // 'hide' | 'collapse' | 'expand'
-				}
-			],
-			sectionDepth: 0
+			components: './src/components/Placeholders/Placeholder.vue'
 		}
 	],
-	require: [path.join(__dirname, 'src/styles.css')],
-	defaultExample: true,
-	webpackConfig: env => ({
+	webpackConfig: {
 		module: {
 			rules: [
 				{
@@ -78,17 +40,8 @@ module.exports = {
 				}
 			]
 		},
-		plugins: [new vueLoader.VueLoaderPlugin()],
-
-		performance:
-			env === 'development'
-				? false
-				: {
-						maxAssetSize: 1685000, // bytes
-						maxEntrypointSize: 1685000, // bytes
-						hints: 'error'
-				  }
-	}),
+		plugins: [new vueLoader.VueLoaderPlugin()]
+	},
 	styleguideDir: 'dist',
 	ribbon: {
 		text: 'Back to examples',
